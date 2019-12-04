@@ -16,7 +16,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@htd/shared/ui-nebular": ["libs/shared/ui-nebular/src/index.ts"]
+      "@htd/shared/ui-nebular": ["libs/shared/ui-nebular/src/index.ts"],
+      "@htd/shared/ui-components": ["libs/shared/ui-components/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
