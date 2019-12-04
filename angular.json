@@ -1,0 +1,141 @@
+{
+  "version": 1,
+  "projects": {
+    "how-to-dad": {
+      "projectType": "application",
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "apps/how-to-dad",
+      "sourceRoot": "apps/how-to-dad/src",
+      "prefix": "how-to-dad",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/how-to-dad",
+            "index": "apps/how-to-dad/src/index.html",
+            "main": "apps/how-to-dad/src/main.ts",
+            "polyfills": "apps/how-to-dad/src/polyfills.ts",
+            "tsConfig": "apps/how-to-dad/tsconfig.app.json",
+            "aot": false,
+            "assets": [
+              "apps/how-to-dad/src/favicon.ico",
+              "apps/how-to-dad/src/assets"
+            ],
+            "styles": ["apps/how-to-dad/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/how-to-dad/src/environments/environment.ts",
+                  "with": "apps/how-to-dad/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "how-to-dad:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "how-to-dad:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "how-to-dad:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/how-to-dad/tsconfig.app.json",
+              "apps/how-to-dad/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/how-to-dad/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/how-to-dad/jest.config.js",
+            "tsConfig": "apps/how-to-dad/tsconfig.spec.json",
+            "setupFile": "apps/how-to-dad/src/test-setup.ts"
+          }
+        }
+      }
+    },
+    "how-to-dad-e2e": {
+      "root": "apps/how-to-dad-e2e",
+      "sourceRoot": "apps/how-to-dad-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/how-to-dad-e2e/cypress.json",
+            "tsConfig": "apps/how-to-dad-e2e/tsconfig.e2e.json",
+            "devServerTarget": "how-to-dad:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "how-to-dad:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["apps/how-to-dad-e2e/tsconfig.e2e.json"],
+            "exclude": ["**/node_modules/**", "!apps/how-to-dad-e2e/**"]
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "defaultCollection": "@nrwl/angular"
+  },
+  "schematics": {
+    "@nrwl/angular:application": {
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
+    },
+    "@nrwl/angular:library": {
+      "unitTestRunner": "jest"
+    }
+  },
+  "defaultProject": "how-to-dad"
+}
