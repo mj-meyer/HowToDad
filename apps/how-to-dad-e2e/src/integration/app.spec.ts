@@ -1,13 +1,6 @@
-import { getGreeting } from '../support/app.po';
-
-describe('how-to-dad', () => {
-  beforeEach(() => cy.visit('/'));
-
-  it('should display welcome message', () => {
-    // Custom command example, see `../support/commands.ts` file
-    cy.login('my-email@something.com', 'myPassword');
-
-    // Function helper example, see `../support/app.po.ts` file
-    getGreeting().contains('Welcome to how-to-dad!');
+describe('My First Test', function() {
+  it('Does not do much!', function() {
+    cy.visit('/');
+    expect(true).to.equal(true);
   });
 });
