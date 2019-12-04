@@ -1,16 +1,27 @@
 import { NbEvaIconsModule } from '@nebular/eva-icons';
-import { NbThemeModule, NbLayoutModule, NbIconModule } from '@nebular/theme';
+import {
+  NbThemeModule,
+  NbLayoutModule,
+  NbIconModule,
+  NbCardModule,
+  NbButtonModule
+} from '@nebular/theme';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+const nbModules = [
+  NbLayoutModule,
+  NbEvaIconsModule,
+  NbIconModule,
+  NbCardModule,
+  NbButtonModule
+];
 @NgModule({
   imports: [
     CommonModule,
-    NbThemeModule.forRoot({ name: 'default' }),
-    NbLayoutModule,
-    NbEvaIconsModule,
-    NbIconModule
+    NbThemeModule.forRoot({ name: 'htd-theme' }),
+    ...nbModules
   ],
-  exports: [NbThemeModule, NbLayoutModule, NbEvaIconsModule, NbIconModule]
+  exports: [NbThemeModule, ...nbModules]
 })
 export class SharedUiNebularModule {}
