@@ -15,7 +15,9 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@htd/shared/ui-nebular": ["libs/shared/ui-nebular/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }

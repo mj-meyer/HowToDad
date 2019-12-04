@@ -1,5 +1,5 @@
 {
-  "npmScope": "how-to-dad",
+  "npmScope": "htd",
   "implicitDependencies": {
     "angular.json": "*",
     "package.json": "*",
@@ -13,6 +13,9 @@
     },
     "how-to-dad": {
       "tags": []
+    },
+    "shared-ui-nebular": {
+      "tags": ["ui"]
     }
   }
 }

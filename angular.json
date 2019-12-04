@@ -10,7 +10,7 @@
       },
       "root": "apps/how-to-dad",
       "sourceRoot": "apps/how-to-dad/src",
-      "prefix": "how-to-dad",
+      "prefix": "htd",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
@@ -121,6 +121,37 @@
             "tsConfig": ["apps/how-to-dad-e2e/tsconfig.e2e.json"],
             "exclude": ["**/node_modules/**", "!apps/how-to-dad-e2e/**"]
           }
+        }
+      }
+    },
+    "shared-ui-nebular": {
+      "projectType": "library",
+      "root": "libs/shared/ui-nebular",
+      "sourceRoot": "libs/shared/ui-nebular/src",
+      "prefix": "htd",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/shared/ui-nebular/tsconfig.lib.json",
+              "libs/shared/ui-nebular/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/shared/ui-nebular/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/shared/ui-nebular/jest.config.js",
+            "tsConfig": "libs/shared/ui-nebular/tsconfig.spec.json",
+            "setupFile": "libs/shared/ui-nebular/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
         }
       }
     }
