@@ -1,0 +1,21 @@
+{
+  "npmScope": "htd",
+  "implicitDependencies": {
+    "angular.json": "*",
+    "package.json": "*",
+    "tsconfig.json": "*",
+    "tslint.json": "*",
+    "nx.json": "*"
+  },
+  "projects": {
+    "how-to-dad-e2e": {
+      "tags": []
+    },
+    "how-to-dad": {
+      "tags": []
+    },
+    "shared-ui-nebular": {
+      "tags": ["ui"]
+    }
+  }
+}
