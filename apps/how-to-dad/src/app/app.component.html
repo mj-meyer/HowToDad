@@ -1,12 +1,6 @@
 <nb-layout>
   <nb-layout-column class="main-column">
-    <header>
-      <img alt="How to Dad logo" width="250" src="../assets/logo.svg" />
-      <h1 class="text-hint">The ULTIMATE Dad Jokes!</h1>
-      <p class="text-hint">
-        Give the gift that NEVER gets old! 😜
-      </p>
-    </header>
+    <htd-header></htd-header>
     <main>
       <nb-card class="joke-card">
         <nb-card-header>
@@ -37,13 +31,5 @@
     </main>
   </nb-layout-column>
 
-  <nb-layout-footer fixed>
-    <!-- Insert footer here -->
-    <p>
-      ©2019 MJ Meyer |
-      <button nbButton status="basic" size="tiny">
-        <nb-icon icon="github"></nb-icon> View On Github
-      </button>
-    </p>
-  </nb-layout-footer>
+  <nb-layout-footer fixed> <htd-footer></htd-footer> </nb-layout-footer>
 </nb-layout>
