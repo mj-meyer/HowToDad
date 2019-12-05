@@ -25,6 +25,9 @@
     },
     "feature-joke-data-access-joke": {
       "tags": ["data-access"]
+    },
+    "shared-styles": {
+      "tags": []
     }
   }
 }
