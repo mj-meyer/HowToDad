@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Lato|Raleway:900&display=swap');
-@import 'themes';
+@import '~libs/shared/ui-nebular/src/lib/themes';
 @import '~@nebular/theme/styles/globals';
 
 @include nb-install() {
