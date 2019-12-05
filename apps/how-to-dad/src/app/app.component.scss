@@ -1,3 +1,5 @@
+@import '../themes.scss';
+
 .main-column {
   padding-top: 0 !important;
 }
@@ -19,6 +21,14 @@ main {
       line-height: 2.5rem;
       font-weight: bold;
       text-shadow: 2px 2px 10px rgba(1, 80, 158, 0.37);
+    }
+
+    nb-card-body {
+      background: nb-theme(color-basic-300);
+    }
+
+    nb-card-footer {
+      background: nb-theme(color-basic-500);
     }
   }
 
