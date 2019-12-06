@@ -185,6 +185,117 @@
           "styleext": "scss"
         }
       }
+    },
+    "feature-joke": {
+      "projectType": "library",
+      "root": "libs/feature-joke",
+      "sourceRoot": "libs/feature-joke/src",
+      "prefix": "htd",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/feature-joke/tsconfig.lib.json",
+              "libs/feature-joke/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/feature-joke/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/feature-joke/jest.config.js",
+            "tsConfig": "libs/feature-joke/tsconfig.spec.json",
+            "setupFile": "libs/feature-joke/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      }
+    },
+    "feature-joke-data-access-joke": {
+      "projectType": "library",
+      "root": "libs/feature-joke/data-access-joke",
+      "sourceRoot": "libs/feature-joke/data-access-joke/src",
+      "prefix": "htd",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/feature-joke/data-access-joke/tsconfig.lib.json",
+              "libs/feature-joke/data-access-joke/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/feature-joke/data-access-joke/**"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/feature-joke/data-access-joke/jest.config.js",
+            "tsConfig": "libs/feature-joke/data-access-joke/tsconfig.spec.json",
+            "setupFile": "libs/feature-joke/data-access-joke/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      }
+    },
+    "shared-styles": {
+      "root": "libs/shared/styles",
+      "sourceRoot": "libs/shared/styles/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["libs/shared/styles/tsconfig.lib.json"],
+            "exclude": ["**/node_modules/**", "!libs/shared/styles/**"]
+          }
+        }
+      }
+    },
+    "interfaces": {
+      "projectType": "library",
+      "root": "libs/interfaces",
+      "sourceRoot": "libs/interfaces/src",
+      "prefix": "htd",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/interfaces/tsconfig.lib.json",
+              "libs/interfaces/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/interfaces/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/interfaces/jest.config.js",
+            "tsConfig": "libs/interfaces/tsconfig.spec.json",
+            "setupFile": "libs/interfaces/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      }
     }
   },
   "cli": {
@@ -196,7 +307,8 @@
       "e2eTestRunner": "cypress"
     },
     "@nrwl/angular:library": {
-      "unitTestRunner": "jest"
+      "unitTestRunner": "jest",
+      "style": "scss"
     }
   },
   "defaultProject": "how-to-dad"

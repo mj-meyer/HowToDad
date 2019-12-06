@@ -1,0 +1,14 @@
+@import '~libs/shared/styles/src/index';
+
+.joke-card {
+  max-width: 800px;
+  width: 100%;
+  text-align: center;
+
+  nb-card-body {
+    background: nb-theme(color-basic-200);
+  }
+  nb-card-footer {
+    background: nb-theme(color-basic-500);
+  }
+}

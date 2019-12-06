@@ -19,6 +19,18 @@
     },
     "shared-ui-components": {
       "tags": []
+    },
+    "feature-joke": {
+      "tags": ["feature"]
+    },
+    "feature-joke-data-access-joke": {
+      "tags": ["data-access"]
+    },
+    "shared-styles": {
+      "tags": []
+    },
+    "interfaces": {
+      "tags": ["interface"]
     }
   }
 }

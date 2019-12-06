@@ -1,20 +1,22 @@
+import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import {
-  NbThemeModule,
-  NbLayoutModule,
-  NbIconModule,
+  NbButtonModule,
   NbCardModule,
-  NbButtonModule
+  NbIconModule,
+  NbLayoutModule,
+  NbSpinnerModule,
+  NbThemeModule
 } from '@nebular/theme';
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
 const nbModules = [
   NbLayoutModule,
   NbEvaIconsModule,
   NbIconModule,
   NbCardModule,
-  NbButtonModule
+  NbButtonModule,
+  NbSpinnerModule
 ];
 @NgModule({
   imports: [
