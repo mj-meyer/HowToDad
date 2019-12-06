@@ -1,11 +1,12 @@
-import { SharedUiNebularModule } from '@htd/shared/ui-nebular';
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule, Route } from '@angular/router';
-import { JokeComponent } from './containers/joke/joke.component';
-import { JokeTextComponent } from './components/joke-text/joke-text.component';
+import { NgModule } from '@angular/core';
+import { Route, RouterModule } from '@angular/router';
+import { SharedUiNebularModule } from '@htd/shared/ui-nebular';
+
 import { JokeActionsComponent } from './components/joke-actions/joke-actions.component';
 import { JokeFooterComponent } from './components/joke-footer/joke-footer.component';
+import { JokeTextComponent } from './components/joke-text/joke-text.component';
+import { JokeComponent } from './containers/joke/joke.component';
 
 export const featureJokeRoutes: Route[] = [
   {
@@ -20,6 +21,11 @@ export const featureJokeRoutes: Route[] = [
     RouterModule.forChild(featureJokeRoutes),
     SharedUiNebularModule
   ],
-  declarations: [JokeComponent, JokeTextComponent, JokeActionsComponent, JokeFooterComponent]
+  declarations: [
+    JokeComponent,
+    JokeTextComponent,
+    JokeActionsComponent,
+    JokeFooterComponent
+  ]
 })
 export class FeatureJokeModule {}

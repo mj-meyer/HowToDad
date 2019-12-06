@@ -1,1 +1,1 @@
-export * from './lib/data-access-joke.module';
+export { JokeService } from './lib/joke.service';

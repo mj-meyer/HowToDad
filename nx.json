@@ -28,6 +28,9 @@
     },
     "shared-styles": {
       "tags": []
+    },
+    "interfaces": {
+      "tags": ["interface"]
     }
   }
 }

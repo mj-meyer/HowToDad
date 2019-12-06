@@ -1,14 +1,18 @@
+import { Observable } from 'rxjs';
+
 import { Component, OnInit } from '@angular/core';
+import { JokeService } from '@htd/feature-joke/data-access-joke';
+import { Joke } from '@htd/interfaces';
 
 @Component({
   selector: 'htd-joke',
   template: `
-    <nb-card class="joke-card">
+    <nb-card
+      class="joke-card"
+      [nbSpinner]="(joke$ | async)?.jokeState == 'Loading'"
+    >
       <nb-card-header>
-        <htd-joke-text
-          joke="Why did the scarecrow win an award? Because he was outstanding in his
-        field."
-        ></htd-joke-text>
+        <htd-joke-text [joke]="(joke$ | async)?.joke"></htd-joke-text>
       </nb-card-header>
       <nb-card-body>
         <htd-joke-actions
@@ -28,12 +32,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./joke.component.scss']
 })
 export class JokeComponent implements OnInit {
-  constructor() {}
+  joke$: Observable<Joke>;
 
-  ngOnInit() {}
+  constructor(private jokeService: JokeService) {}
 
+  ngOnInit() {
+    this.joke$ = this.jokeService.joke$;
+    this.jokeService.getNewJoke();
+  }
+
+  newJoke() {
+    this.jokeService.getNewJoke();
+  }
   favouriteEvent() {}
-  newJoke() {}
   shareJoke() {}
   viewAllFavourites() {}
 }

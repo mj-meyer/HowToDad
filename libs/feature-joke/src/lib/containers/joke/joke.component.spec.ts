@@ -1,35 +1,64 @@
-import { JokeActionsComponent } from './../../components/joke-actions/joke-actions.component';
+import { of } from 'rxjs';
+
+import { fakeAsync } from '@angular/core/testing';
+import { JokeService } from '@htd/feature-joke/data-access-joke';
 import {
-  Spectator,
   createComponentFactory,
-  SpectatorHost,
-  createHostFactory
+  mockProvider,
+  Spectator
 } from '@ngneat/spectator/jest';
 
 import { JokeComponent } from './joke.component';
 
-describe('JokeComponent', function() {
-  let spectator: SpectatorHost<JokeActionsComponent, JokeComponent>;
-  const createHost = createHostFactory({
-    component: JokeActionsComponent,
-    host: JokeComponent,
+describe('JokeComponent', () => {
+  let spectator: Spectator<JokeComponent>;
+  let mockJokeService: JokeService;
+  const createComponent = createComponentFactory({
+    component: JokeComponent,
+    providers: [
+      mockProvider(JokeService, {
+        joke$: of({
+          id: null,
+          joke: 'Loading dad joke...',
+          status: null,
+          jokeState: 'Loading'
+        })
+      })
+    ],
     shallow: true
   });
 
-  it('should be defined', () => {
-    spectator = createHost(`<htd-joke-actions></htd-joke-actions>`);
-    expect(spectator.component).toBeDefined();
-    expect(spectator.hostComponent).toBeDefined();
+  beforeEach(function() {
+    spectator = createComponent();
+    mockJokeService = spectator.get(JokeService);
   });
 
-  it('should display the host component title', () => {
-    spectator = createHost(`<htd-joke-actions 
-    (newJoke)="newJoke()"
-    ></htd-joke-actions>`);
+  it('should be defined', () => {
+    expect(spectator.component).toBeTruthy();
+  });
 
-    const hostFav = spyOn(spectator.hostComponent, 'newJoke');
+  it('should GET new Joke on component INIT', () => {
+    expect(mockJokeService.getNewJoke).toHaveBeenCalled();
+    expect(mockJokeService.getNewJoke).toHaveBeenCalledTimes(1);
+  });
 
-    spectator.click('[data-test="btnNewJoke"]');
-    expect(hostFav).toHaveBeenCalled();
+  it('should have initial joke data', fakeAsync(() => {
+    const mockJokeInit = {
+      id: null,
+      joke: 'Loading dad joke...',
+      status: null,
+      jokeState: 'Loading'
+    };
+
+    let subscriber;
+    spectator.component.joke$.subscribe(joke => {
+      subscriber = joke;
+    });
+    expect(subscriber).toEqual(mockJokeInit);
+  }));
+
+  it('should be able to get a new Joke', () => {
+    spectator.component.newJoke();
+    expect(mockJokeService.getNewJoke).toHaveBeenCalledTimes(2);
   });
 });
