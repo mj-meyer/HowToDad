@@ -18,7 +18,7 @@ describe('Home page contains', function() {
   });
 
   it('joke', function() {
-    cy.get('.joke > p').should('be.visible');
+    cy.get('[data-test="joke-text"]').should('be.visible');
   });
 
   it('joke actions', function() {
@@ -32,7 +32,7 @@ describe('Home page contains', function() {
   });
 
   it('view all favourite jokes button', function() {
-    cy.get('.joke-footer > button')
+    cy.get('[data-test="btnAllFavourites"]')
       .should('be.visible')
       .should('contain.html', 'nb-icon');
   });
