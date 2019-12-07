@@ -296,6 +296,37 @@
           "styleext": "scss"
         }
       }
+    },
+    "feature-joke-state": {
+      "projectType": "library",
+      "root": "libs/feature-joke-state",
+      "sourceRoot": "libs/feature-joke-state/src",
+      "prefix": "htd",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/feature-joke-state/tsconfig.lib.json",
+              "libs/feature-joke-state/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/feature-joke-state/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/feature-joke-state/jest.config.js",
+            "tsConfig": "libs/feature-joke-state/tsconfig.spec.json",
+            "setupFile": "libs/feature-joke-state/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      }
     }
   },
   "cli": {

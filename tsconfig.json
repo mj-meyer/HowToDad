@@ -22,7 +22,8 @@
       "@htd/feature-joke/data-access-joke": [
         "libs/feature-joke/data-access-joke/src/index.ts"
       ],
-      "@htd/interfaces": ["libs/interfaces/src/index.ts"]
+      "@htd/interfaces": ["libs/interfaces/src/index.ts"],
+      "@htd/feature-joke-state": ["libs/feature-joke-state/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
