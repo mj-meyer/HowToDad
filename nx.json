@@ -31,6 +31,9 @@
     },
     "interfaces": {
       "tags": ["interface"]
+    },
+    "feature-joke-state": {
+      "tags": ["feature"]
     }
   }
 }
