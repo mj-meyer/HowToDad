@@ -8,6 +8,7 @@ import { SharedUiNebularModule } from '@htd/shared/ui-nebular';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { StorageModule } from '@ngx-pwa/local-storage';
 
 @NgModule({
   declarations: [AppComponent],
@@ -18,7 +19,8 @@ import { AppComponent } from './app.component';
     AppRoutingModule,
     SharedUiNebularModule,
     SharedUiComponentsModule,
-    FeatureJokeModule
+    FeatureJokeModule,
+    StorageModule.forRoot({ IDBNoWrap: true })
   ],
   providers: [],
   bootstrap: [AppComponent]

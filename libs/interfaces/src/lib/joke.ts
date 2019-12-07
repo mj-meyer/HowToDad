@@ -5,4 +5,4 @@ export interface Joke {
   jokeState: jokeState;
 }
 
-type jokeState = 'Loading' | 'Success' | 'Error';
+type jokeState = 'Loading' | 'Success' | 'Error' | 'Exists';

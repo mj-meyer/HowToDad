@@ -61,4 +61,16 @@ describe('JokeComponent', () => {
     spectator.component.newJoke();
     expect(mockJokeService.getNewJoke).toHaveBeenCalledTimes(2);
   });
+  it('should be able to trigger favourite event', () => {
+    spectator.component.favouriteEvent();
+    expect(mockJokeService.favouriteEvent).toHaveBeenCalledTimes(1);
+  });
+  it('should be able to trigger share Joke', () => {
+    spectator.component.shareJoke();
+    expect(mockJokeService.shareJoke).toHaveBeenCalledTimes(1);
+  });
+  it('should be able to trigger all favourites', () => {
+    spectator.component.viewAllFavourites();
+    expect(mockJokeService.viewAllFavourites).toHaveBeenCalledTimes(1);
+  });
 });
