@@ -36,7 +36,7 @@ import { ModalEvent } from '@htd/interfaces';
           size="small"
           nbButton
           status="info"
-          (click)="eventActions.emit({ event: 'shareAll' })"
+          (click)="eventActions.emit({ event: 'shareAll' }); closeModal.emit()"
         >
           <nb-icon icon="share"></nb-icon> Share List
         </button>

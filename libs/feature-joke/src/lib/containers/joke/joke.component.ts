@@ -1,7 +1,6 @@
 import { Observable } from 'rxjs';
 
 import { Component, OnInit } from '@angular/core';
-import { ShareJokeService } from '@htd/data-access-share';
 import { JokeService } from '@htd/feature-joke/data-access-joke';
 import { Joke, Share } from '@htd/interfaces';
 import { ModalComponent } from '@htd/shared/ui-components';
@@ -38,25 +37,30 @@ export class JokeComponent implements OnInit {
 
   constructor(
     private jokeService: JokeService,
-    private dialogService: NbDialogService,
-    private shareJokeService: ShareJokeService
+    private dialogService: NbDialogService
   ) {}
 
   ngOnInit() {
     this.joke$ = this.jokeService.joke$;
     this.jokeService.loadFavourites();
     this.jokeService.getNewJoke();
+    this.jokeService.shareAllJokes$.subscribe(data => {
+      console.log('data share all', data);
+      this.shareJoke(data);
+    });
   }
 
   newJoke() {
     this.jokeService.getNewJoke();
   }
+
   favouriteEvent() {
     this.jokeService.favouriteEvent();
   }
+
   shareJoke(data) {
-    this.jokeService.shareJoke().subscribe((share: Share) => {
-      const dialog = this.dialogService.open(ModalComponent, {
+    this.jokeService.shareJoke(data).subscribe((share: Share) => {
+      this.dialogService.open(ModalComponent, {
         context: { share }
       });
     });

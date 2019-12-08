@@ -45,5 +45,13 @@ export class ModalShareComponent implements OnInit {
 
   copyLink() {
     console.log('copy link');
+    navigator.clipboard.writeText(this.uri).then(
+      function() {
+        /* clipboard successfully set */
+      },
+      function() {
+        /* clipboard write failed */
+      }
+    );
   }
 }

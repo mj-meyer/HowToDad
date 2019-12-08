@@ -1,11 +1,11 @@
 import { ShareJokeService } from '@htd/data-access-share';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { LocalStorageService } from '@htd/feature-joke-state';
 import { Joke, ModalEvent } from '@htd/interfaces';
-import { tap } from 'rxjs/operators';
+import { tap, map, switchMap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -25,6 +25,14 @@ export class JokeService {
 
   private _joke = new BehaviorSubject<Joke>(this.jokeInitialValue);
   public joke$ = this._joke.asObservable();
+
+  private _shareAllJokes = new Subject<any>();
+  public shareAllJokes$ = this._shareAllJokes.asObservable().pipe(
+    switchMap(() => this.favouriteJokes$),
+    map(jokeArray => {
+      return { jokes: jokeArray };
+    })
+  );
 
   constructor(
     private http: HttpClient,
@@ -58,8 +66,8 @@ export class JokeService {
     });
   }
 
-  shareJoke() {
-    const currentJoke = this._joke.getValue();
+  shareJoke(data) {
+    const currentJoke = data || this._joke.getValue();
     this.setState({ jokeState: 'Loading' });
     return this.shareJokeService
       .saveJokes(currentJoke)
@@ -82,7 +90,7 @@ export class JokeService {
     const jokeStateService = this.jokeState;
     console.log({ event, payload });
     const eventActions: any = {
-      share: () => console.error('Modal Event Not Mapped', modalEvent),
+      shareAll: () => this._shareAllJokes.next('shareAll'),
       deleteAll: () => jokeStateService.removeAllJokes(),
       deleteOne: joke => jokeStateService.removeJoke(joke)
     };
