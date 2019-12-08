@@ -52,10 +52,10 @@ describe('JokeService', () => {
 
   it('should trigger loading of all jokes', () => {
     const jokeState = spectator.get(LocalStorageService);
-    jest.spyOn(jokeState, 'addAllJokesToSubject');
+    jest.spyOn(jokeState, 'addStorageJokesToSubject');
     spectator.service.loadFavourites();
 
-    expect(jokeState.addAllJokesToSubject).toHaveBeenCalled();
+    expect(jokeState.addStorageJokesToSubject).toHaveBeenCalled();
   });
 
   it('should change joke state to Exists', () => {

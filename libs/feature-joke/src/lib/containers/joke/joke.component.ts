@@ -1,10 +1,11 @@
-import { ModalComponent } from '@htd/shared/ui-components';
 import { Observable } from 'rxjs';
 
 import { Component, OnInit } from '@angular/core';
 import { JokeService } from '@htd/feature-joke/data-access-joke';
-import { Joke } from '@htd/interfaces';
+import { Joke, Share } from '@htd/interfaces';
+import { ModalComponent } from '@htd/shared/ui-components';
 import { NbDialogService } from '@nebular/theme';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 
 @Component({
   selector: 'htd-joke',
@@ -37,34 +38,60 @@ export class JokeComponent implements OnInit {
 
   constructor(
     private jokeService: JokeService,
-    private dialogService: NbDialogService
+    private dialogService: NbDialogService,
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
 
   ngOnInit() {
     this.joke$ = this.jokeService.joke$;
     this.jokeService.loadFavourites();
     this.jokeService.getNewJoke();
+    this.jokeService.shareAllJokes$.subscribe(data => {
+      this.shareJoke(data);
+    });
+    const loadUrl = this.route.snapshot.url;
+    //Todo: do better
+    if (loadUrl.length) {
+      this.jokeService.loadJokes(loadUrl);
+      // tslint:disable-next-line:no-unused-expression
+      loadUrl[1] && this.viewAllFavourites(true);
+    }
   }
 
   newJoke() {
     this.jokeService.getNewJoke();
   }
+
   favouriteEvent() {
     this.jokeService.favouriteEvent();
   }
-  shareJoke() {
-    // this.jokeService.shareJoke();
+
+  shareJoke(data) {
+    this.jokeService.shareJoke(data).subscribe((share: Share) => {
+      this.dialogService.open(ModalComponent, {
+        context: { share }
+      });
+    });
   }
 
-  viewAllFavourites() {
+  viewAllFavourites(sharedList = false) {
     const dialog = this.dialogService.open(ModalComponent, {
-      context: { favourites$: this.jokeService.favouriteJokes$ }
+      context: {
+        favourites$: this.jokeService.favouriteJokes$,
+        sharedList: sharedList
+      }
     });
 
     const events = dialog.componentRef.instance.events.subscribe(event =>
       this.jokeService.modalEvents(event)
     );
 
-    dialog.onClose.subscribe(_ => events.unsubscribe());
+    dialog.onClose.subscribe(_ => {
+      if (sharedList) {
+        this.router.navigate(['/']);
+      }
+      events.unsubscribe();
+    });
   }
 }

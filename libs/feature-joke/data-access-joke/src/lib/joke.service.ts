@@ -1,9 +1,11 @@
-import { BehaviorSubject } from 'rxjs';
+import { ShareJokeService } from '@htd/data-access-share';
+import { BehaviorSubject, Subject } from 'rxjs';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { LocalStorageService } from '@htd/feature-joke-state';
 import { Joke, ModalEvent } from '@htd/interfaces';
+import { tap, map, switchMap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -24,21 +26,53 @@ export class JokeService {
   private _joke = new BehaviorSubject<Joke>(this.jokeInitialValue);
   public joke$ = this._joke.asObservable();
 
+  private _shareAllJokes = new Subject<any>();
+  public shareAllJokes$ = this._shareAllJokes.asObservable().pipe(
+    switchMap(() => this.favouriteJokes$),
+    map(jokeArray => {
+      return { jokes: jokeArray };
+    })
+  );
+
   constructor(
     private http: HttpClient,
-    private jokeState: LocalStorageService
+    private jokeState: LocalStorageService,
+    private shareJokeService: ShareJokeService
   ) {}
 
   favouriteJokes$ = this.jokeState.favourites$;
 
   loadFavourites() {
-    this.jokeState.addAllJokesToSubject();
+    this.jokeState.addStorageJokesToSubject();
   }
 
   setState(newState: Partial<Joke>) {
     const currentState = this._joke.getValue();
     const mergeState = { ...currentState, ...newState };
     this._joke.next(mergeState);
+  }
+
+  loadJokes(urlSegment) {
+    const [oneJoke, allJokes = null] = urlSegment;
+    allJokes ? this.loadAllJokes(allJokes) : this.loadOneJoke(oneJoke);
+  }
+
+  loadAllJokes(id) {
+    this.shareJokeService.getJokes(id).subscribe(({ data }: any) => {
+      this.jokeState.favourites = JSON.parse(data).jokes;
+    });
+  }
+
+  emptyJokeState() {
+    // Todo: fix this is bad
+    this.favouriteJokes$ = [];
+  }
+
+  loadOneJoke(id) {
+    this.shareJokeService.getJokes(id).subscribe(({ data }: any) => {
+      const joke = JSON.parse(data);
+      this.setState(joke);
+    });
   }
 
   getNewJoke() {
@@ -55,6 +89,14 @@ export class JokeService {
     });
   }
 
+  shareJoke(data) {
+    const currentJoke = data || this._joke.getValue();
+    this.setState({ jokeState: 'Loading' });
+    return this.shareJokeService
+      .saveJokes(currentJoke)
+      .pipe(tap(_ => this.setState({ jokeState: 'Success' })));
+  }
+
   favouriteEvent() {
     const currentJoke = this._joke.getValue();
     if (currentJoke.jokeState === 'Exists') {
@@ -69,11 +111,11 @@ export class JokeService {
   modalEvents(modalEvent: ModalEvent) {
     const { event, payload = 'none' } = modalEvent;
     const jokeStateService = this.jokeState;
-    console.log({ event, payload });
     const eventActions: any = {
-      share: () => console.error('Modal Event Not Mapped', modalEvent),
+      shareAll: () => this._shareAllJokes.next('shareAll'),
       deleteAll: () => jokeStateService.removeAllJokes(),
-      deleteOne: joke => jokeStateService.removeJoke(joke)
+      deleteOne: joke => jokeStateService.removeJoke(joke),
+      addJokesStorage: () => jokeStateService.addJokesToStorage()
     };
     eventActions[event]
       ? payload

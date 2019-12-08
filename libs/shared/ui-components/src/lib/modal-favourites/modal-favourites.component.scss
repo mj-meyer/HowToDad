@@ -1,0 +1,42 @@
+@import '~libs/shared/styles/src/index';
+
+nb-card {
+  max-width: 500px;
+}
+
+nb-card-body {
+  padding: 0;
+}
+
+nb-card-footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  button {
+    width: 30%;
+  }
+}
+
+nb-list-item {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+
+  &:nth-child(odd) {
+    background: nb-theme(color-basic-200);
+  }
+}
+
+.removeJoke {
+  width: 20%;
+  text-align: right;
+}
+
+.joke {
+  width: 80%;
+}
+
+.jokeOnly {
+  width: 100%;
+}

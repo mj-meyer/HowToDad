@@ -5,9 +5,15 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   template: `
     <p>
       ©2019 MJ Meyer |
-      <button nbButton status="basic" size="tiny">
+      <a
+        nbButton
+        status="basic"
+        size="tiny"
+        target="_blank"
+        href="https://github.com/mj-meyer/HowToDad"
+      >
         <nb-icon icon="github"></nb-icon> View On Github
-      </button>
+      </a>
     </p>
   `,
   styleUrls: ['./footer.component.scss'],
