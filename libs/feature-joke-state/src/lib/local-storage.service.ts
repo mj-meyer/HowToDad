@@ -44,6 +44,12 @@ export class LocalStorageService {
     });
   }
 
+  removeAllJokes() {
+    this.storage.clear().subscribe(() => {
+      this.favourites = [];
+    });
+  }
+
   jokeExists(joke: Joke) {
     const id = this.jokeId(joke.id);
     return this.storage.has(id);

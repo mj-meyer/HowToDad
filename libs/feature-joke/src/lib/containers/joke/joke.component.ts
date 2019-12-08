@@ -61,8 +61,10 @@ export class JokeComponent implements OnInit {
       context: { favourites$: this.jokeService.favouriteJokes$ }
     });
 
-    // console.log('dialog', dialog);
-    // dialog.componentRef.instance.
-    // this.jokeService.viewAllFavourites();
+    const events = dialog.componentRef.instance.events.subscribe(event =>
+      this.jokeService.modalEvents(event)
+    );
+
+    dialog.onClose.subscribe(_ => events.unsubscribe());
   }
 }
