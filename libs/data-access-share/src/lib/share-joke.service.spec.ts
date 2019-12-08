@@ -1,5 +1,9 @@
 import { Joke } from '@htd/interfaces';
-import { createHttpFactory, HttpMethod } from '@ngneat/spectator';
+import {
+  createHttpFactory,
+  HttpMethod,
+  SpectatorHttp
+} from '@ngneat/spectator/jest';
 import { ShareJokeService } from './share-joke.service';
 
 describe('ShareJokeService', () => {

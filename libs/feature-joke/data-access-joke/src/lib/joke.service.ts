@@ -1,9 +1,11 @@
+import { ShareJokeService } from '@htd/data-access-share';
 import { BehaviorSubject } from 'rxjs';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { LocalStorageService } from '@htd/feature-joke-state';
 import { Joke, ModalEvent } from '@htd/interfaces';
+import { tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +28,8 @@ export class JokeService {
 
   constructor(
     private http: HttpClient,
-    private jokeState: LocalStorageService
+    private jokeState: LocalStorageService,
+    private shareJokeService: ShareJokeService
   ) {}
 
   favouriteJokes$ = this.jokeState.favourites$;
@@ -53,6 +56,14 @@ export class JokeService {
       });
       this.setState(jokeResult);
     });
+  }
+
+  shareJoke() {
+    const currentJoke = this._joke.getValue();
+    this.setState({ jokeState: 'Loading' });
+    return this.shareJokeService
+      .saveJokes(currentJoke)
+      .pipe(tap(_ => this.setState({ jokeState: 'Success' })));
   }
 
   favouriteEvent() {
