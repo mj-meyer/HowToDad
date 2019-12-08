@@ -2,7 +2,7 @@
 
 A web app to help you become the ULTIMATE Dad! Are you even a dad if you don't "dad joke"?
 
-🔎 **Project Design**
+## 🔎 Project Design
 
 I started off with a rough wireframe to get an idea of what I wanted to do. Below you can find a link to the Figma doc:
 - [Figma Wireframe](https://www.figma.com/file/HOAhRy7mzwuBcY5wXhuBUk/HowToDad-App)
@@ -12,7 +12,7 @@ There's also the logo I created:
 - [Figma HTD Logo](https://www.figma.com/file/Cj2BPCL6d995AvdP76mh8p/HowToDad-Logo)
 
 
-🔎 **API's used**
+## 🔎 API's used
 
 I chose to use 2 API's in this project.
 
@@ -30,7 +30,7 @@ https://akveo.github.io/nebular/
 - [Nebular](https://akveo.github.io/nebular/)
 
 
-🔎 **Tech I had to learn on this project**
+## 🔎 Tech I had to learn on this project
 
 - Nebular
 
@@ -44,7 +44,7 @@ This is a local storage like library for angular, except it interfaces with Inde
 
 Haven't really used Github. Most projects I work on are on Gitlab. I used Github to plan and manage the project. It's been a pretty cool experience :)
 
-🔎 **Project assumptions**
+## 🔎 Project assumptions
 
 - Sharing jokes through myjson.com, I assumed it will be available long enough to share a link, but storing the user's jokes in local storage would be safer, as people generally don't clear it often.
 - I also avoided looking up jokes by Id on the icanhazdadjoke api, as I'm not confident the Id's will always be unique. Thus, I only used it to fetch random jokes.
