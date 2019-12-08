@@ -42,7 +42,7 @@ This is a local storage like library for angular, except it interfaces with Inde
 
 - Github
 
-Haven't really used Github. Most projects I work on are on Gitlab. It's been a pretty cool experience :)
+Haven't really used Github. Most projects I work on are on Gitlab. I used Github to plan and manage the project. It's been a pretty cool experience :)
 
 🔎 **Project assumptions**
 
