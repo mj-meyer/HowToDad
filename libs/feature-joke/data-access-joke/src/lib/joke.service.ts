@@ -29,6 +29,12 @@ export class JokeService {
     private jokeState: LocalStorageService
   ) {}
 
+  favouriteJokes$ = this.jokeState.favourites$;
+
+  loadFavourites() {
+    this.jokeState.addAllJokesToSubject();
+  }
+
   setState(newState: Partial<Joke>) {
     const currentState = this._joke.getValue();
     const mergeState = { ...currentState, ...newState };
