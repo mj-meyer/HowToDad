@@ -12,6 +12,14 @@ export const featureJokeRoutes: Route[] = [
   {
     path: '',
     component: JokeComponent
+  },
+  {
+    path: ':id',
+    component: JokeComponent
+  },
+  {
+    path: 'list/:id',
+    component: JokeComponent
   }
 ];
 

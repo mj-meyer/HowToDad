@@ -14,7 +14,9 @@ import {
       <nb-card-header>Share Jokes </nb-card-header>
       <nb-card-body>
         <nb-list-item>
-          <div class="share">{{ uri }}</div>
+          <div class="share">
+            {{ host + '/' + uri.replace('https://api.myjson.com/bins/', '') }}
+          </div>
         </nb-list-item>
       </nb-card-body>
       <nb-card-footer>
@@ -39,12 +41,17 @@ import {
 export class ModalShareComponent implements OnInit {
   @Input() uri;
   @Output() closeModal = new EventEmitter();
+  host;
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.host =
+      window.location.hostname === 'localhost'
+        ? 'http://localhost:4200'
+        : window.location.hostname;
+  }
 
   copyLink() {
-    console.log('copy link');
     navigator.clipboard.writeText(this.uri).then(
       function() {
         /* clipboard successfully set */

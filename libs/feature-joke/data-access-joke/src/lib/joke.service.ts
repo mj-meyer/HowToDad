@@ -43,13 +43,36 @@ export class JokeService {
   favouriteJokes$ = this.jokeState.favourites$;
 
   loadFavourites() {
-    this.jokeState.addAllJokesToSubject();
+    this.jokeState.addStorageJokesToSubject();
   }
 
   setState(newState: Partial<Joke>) {
     const currentState = this._joke.getValue();
     const mergeState = { ...currentState, ...newState };
     this._joke.next(mergeState);
+  }
+
+  loadJokes(urlSegment) {
+    const [oneJoke, allJokes = null] = urlSegment;
+    allJokes ? this.loadAllJokes(allJokes) : this.loadOneJoke(oneJoke);
+  }
+
+  loadAllJokes(id) {
+    this.shareJokeService.getJokes(id).subscribe(({ data }: any) => {
+      this.jokeState.favourites = JSON.parse(data).jokes;
+    });
+  }
+
+  emptyJokeState() {
+    // Todo: fix this is bad
+    this.favouriteJokes$ = [];
+  }
+
+  loadOneJoke(id) {
+    this.shareJokeService.getJokes(id).subscribe(({ data }: any) => {
+      const joke = JSON.parse(data);
+      this.setState(joke);
+    });
   }
 
   getNewJoke() {
@@ -88,11 +111,11 @@ export class JokeService {
   modalEvents(modalEvent: ModalEvent) {
     const { event, payload = 'none' } = modalEvent;
     const jokeStateService = this.jokeState;
-    console.log({ event, payload });
     const eventActions: any = {
       shareAll: () => this._shareAllJokes.next('shareAll'),
       deleteAll: () => jokeStateService.removeAllJokes(),
-      deleteOne: joke => jokeStateService.removeJoke(joke)
+      deleteOne: joke => jokeStateService.removeJoke(joke),
+      addJokesStorage: () => jokeStateService.addJokesToStorage()
     };
     eventActions[event]
       ? payload

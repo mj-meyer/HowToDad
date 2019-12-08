@@ -55,7 +55,7 @@ export class LocalStorageService {
     return this.storage.has(id);
   }
 
-  addAllJokesToSubject() {
+  addStorageJokesToSubject() {
     this.storage
       .keys()
       .pipe(
@@ -66,5 +66,17 @@ export class LocalStorageService {
       .subscribe((jokes: Joke[]) => {
         this.favourites = [...this.favourites, ...jokes];
       });
+  }
+
+  // TODO: finish this later
+  addJokesToStorage(jokes = []) {
+    let jokeList = jokes;
+    if (!jokes.length) {
+      jokeList = this.favourites;
+    }
+    const newJokeList = jokeList.map(joke => {
+      return { ...joke, id: this.jokeId(joke.id) };
+    });
+    this.favourites = newJokeList;
   }
 }

@@ -10,6 +10,7 @@ import { Observable } from 'rxjs';
   template: `
     <htd-modal-favourites
       *ngIf="!share"
+      [sharedList]="sharedList"
       [favourites]="favourites$ | async"
       (closeModal)="close()"
       (eventActions)="events.emit($event)"
@@ -26,6 +27,7 @@ export class ModalComponent implements OnInit {
   events: EventEmitter<ModalEvent> = new EventEmitter<ModalEvent>();
   favourites$: Observable<Joke[]>;
   share: Share;
+  sharedList;
 
   constructor(protected dialogRef: NbDialogRef<ModalComponent>) {}
 

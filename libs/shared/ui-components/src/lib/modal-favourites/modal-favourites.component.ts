@@ -13,11 +13,15 @@ import { ModalEvent } from '@htd/interfaces';
   selector: 'htd-modal-favourites',
   template: `
     <nb-card size="medium">
-      <nb-card-header>Favourite Jokes </nb-card-header>
+      <nb-card-header
+        >{{ !sharedList ? 'Favourite Jokes' : 'Shared Jokes' }}
+      </nb-card-header>
       <nb-card-body>
         <nb-list-item *ngFor="let favourite of favourites">
-          <div class="joke">{{ favourite.joke }}</div>
-          <div class="removeJoke">
+          <div [ngClass]="{ joke: !sharedList, jokeOnly: sharedList }">
+            {{ favourite.joke }}
+          </div>
+          <div class="removeJoke" *ngIf="!sharedList">
             <button
               nbButton
               outline
@@ -33,6 +37,7 @@ import { ModalEvent } from '@htd/interfaces';
       </nb-card-body>
       <nb-card-footer>
         <button
+          *ngIf="!sharedList"
           size="small"
           nbButton
           status="info"
@@ -40,7 +45,19 @@ import { ModalEvent } from '@htd/interfaces';
         >
           <nb-icon icon="share"></nb-icon> Share List
         </button>
+        <!--<button
+          *ngIf="sharedList"
+          size="small"
+          nbButton
+          status="success"
+          (click)="
+            eventActions.emit({ event: 'addJokesStorage' }); closeModal.emit()
+          "
+        >
+          <nb-icon icon="save"></nb-icon> Save List
+        </button>-->
         <button
+          *ngIf="!sharedList"
           size="small"
           outline
           nbButton
@@ -66,6 +83,7 @@ import { ModalEvent } from '@htd/interfaces';
 })
 export class ModalFavouritesComponent implements OnInit {
   @Input() favourites: Joke[];
+  @Input() sharedList;
   @Output() closeModal = new EventEmitter<any>();
   @Output() eventActions = new EventEmitter<ModalEvent>();
 
