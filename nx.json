@@ -34,6 +34,9 @@
     },
     "feature-joke-state": {
       "tags": ["feature"]
+    },
+    "data-access-share": {
+      "tags": ["data-access"]
     }
   }
 }
