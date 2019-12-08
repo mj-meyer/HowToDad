@@ -53,7 +53,7 @@ export class JokeComponent implements OnInit {
     this.jokeService.favouriteEvent();
   }
   shareJoke() {
-    this.jokeService.shareJoke();
+    // this.jokeService.shareJoke();
   }
 
   viewAllFavourites() {

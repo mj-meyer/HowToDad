@@ -65,6 +65,4 @@ export class JokeService {
       this.setState({ jokeState: 'Exists' });
     }
   }
-  shareJoke() {}
-  viewAllFavourites() {}
 }
