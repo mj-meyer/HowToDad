@@ -3,6 +3,7 @@
 A web app to help you become the ULTIMATE Dad! Are you even a dad if you don't "dad joke"?
 
 🔎 **API's used**
+
 I chose to use 2 API's in this project.
 
 - [icanhazdadjoke.com](https://icanhazdadjoke.com/)
@@ -19,10 +20,13 @@ https://akveo.github.io/nebular/
 - [Nebular](https://akveo.github.io/nebular/)
 
 🔎 **Tech I had to learn on this project**
+
 - Nebular
+
 This was the first time I used Nebular. Really enjoyed exploring a new UI library.
 
 - @ngx-pwa/local-storage
+
 This is a local storage like library for angular, except it interfaces with IndexDB. So it's asynchronous unlike localStorage
 
 ## Development server
