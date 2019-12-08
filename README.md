@@ -19,6 +19,7 @@ https://akveo.github.io/nebular/
 - [Cypress](https://www.cypress.io/)
 - [Nebular](https://akveo.github.io/nebular/)
 
+
 🔎 **Tech I had to learn on this project**
 
 - Nebular
@@ -28,6 +29,12 @@ This was the first time I used Nebular. Really enjoyed exploring a new UI librar
 - @ngx-pwa/local-storage
 
 This is a local storage like library for angular, except it interfaces with IndexDB. So it's asynchronous unlike localStorage
+
+🔎 **Project assumptions**
+
+- Sharing jokes through myjson.com, I assumed it will be available long enough to share a link, but storing the user's jokes in local storage would be safer, as people generally don't clear it often.
+- I also avoided looking up jokes by Id on the icanhazdadjoke api, as I'm not confident the Id's will always be unique. Thus, I only used it to fetch random jokes.
+
 
 ## Development server
 
