@@ -40,6 +40,10 @@ This was the first time I used Nebular. Really enjoyed exploring a new UI librar
 
 This is a local storage like library for angular, except it interfaces with IndexDB. So it's asynchronous unlike localStorage
 
+- Github
+
+Haven't really used Github. Most projects I work on are on Gitlab. It's been a pretty cool experience :)
+
 🔎 **Project assumptions**
 
 - Sharing jokes through myjson.com, I assumed it will be available long enough to share a link, but storing the user's jokes in local storage would be safer, as people generally don't clear it often.
