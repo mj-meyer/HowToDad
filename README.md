@@ -1,4 +1,4 @@
-# HowToDad
+# HowToDad - [LIVE DEMO](https://howtodad.netlify.com/)
 
 A web app to help you become the ULTIMATE Dad! Are you even a dad if you don't "dad joke"?
 
