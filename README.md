@@ -20,7 +20,7 @@ I chose to use 2 API's in this project.
 - [myjson.com](http://myjson.com/)
 
 
-https://akveo.github.io/nebular/
+## 🔎 Tech used on this project
 
 - [Angular](https://angular.io)
 - [Nx Dev Tools](https://nx.dev/angular)
@@ -28,6 +28,7 @@ https://akveo.github.io/nebular/
 - [Jest](https://jestjs.io/)
 - [Cypress](https://www.cypress.io/)
 - [Nebular](https://akveo.github.io/nebular/)
+- [@ngx-pwa/local-storage](https://github.com/cyrilletuzi/angular-async-local-storage)
 
 
 ## 🔎 Tech I had to learn on this project
