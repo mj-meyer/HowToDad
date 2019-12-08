@@ -3,7 +3,7 @@ import { BehaviorSubject } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { LocalStorageService } from '@htd/feature-joke-state';
-import { Joke } from '@htd/interfaces';
+import { Joke, ModalEvent } from '@htd/interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -28,6 +28,12 @@ export class JokeService {
     private http: HttpClient,
     private jokeState: LocalStorageService
   ) {}
+
+  favouriteJokes$ = this.jokeState.favourites$;
+
+  loadFavourites() {
+    this.jokeState.addAllJokesToSubject();
+  }
 
   setState(newState: Partial<Joke>) {
     const currentState = this._joke.getValue();
@@ -59,6 +65,20 @@ export class JokeService {
       this.setState({ jokeState: 'Exists' });
     }
   }
-  shareJoke() {}
-  viewAllFavourites() {}
+
+  modalEvents(modalEvent: ModalEvent) {
+    const { event, payload = 'none' } = modalEvent;
+    const jokeStateService = this.jokeState;
+    console.log({ event, payload });
+    const eventActions: any = {
+      share: () => console.error('Modal Event Not Mapped', modalEvent),
+      deleteAll: () => jokeStateService.removeAllJokes(),
+      deleteOne: joke => jokeStateService.removeJoke(joke)
+    };
+    eventActions[event]
+      ? payload
+        ? eventActions[event](payload)
+        : eventActions[event]()
+      : console.error('Modal Event Not Mapped', modalEvent);
+  }
 }

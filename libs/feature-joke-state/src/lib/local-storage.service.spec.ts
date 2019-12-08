@@ -72,4 +72,14 @@ describe('LocalStorageService', () => {
 
     expect(mockStorage.has).toHaveBeenCalledWith(mockJokeId);
   });
+
+  it('should remove all jokes from storage and rx state', () => {
+    const mockStorage = spectator.get(StorageMap);
+    spectator.service.favourites = [mockJoke];
+    jest.spyOn(mockStorage, 'clear').mockImplementation(() => of<any>({}));
+    spectator.service.removeAllJokes();
+
+    expect(mockStorage.clear).toHaveBeenCalled();
+    expect(spectator.service.favourites).toEqual([]);
+  });
 });

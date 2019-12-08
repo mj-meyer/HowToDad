@@ -1,3 +1,4 @@
+import { SharedUiComponentsModule } from '@htd/shared/ui-components';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { Route, RouterModule } from '@angular/router';
@@ -7,7 +8,6 @@ import { JokeActionsComponent } from './components/joke-actions/joke-actions.com
 import { JokeFooterComponent } from './components/joke-footer/joke-footer.component';
 import { JokeTextComponent } from './components/joke-text/joke-text.component';
 import { JokeComponent } from './containers/joke/joke.component';
-
 export const featureJokeRoutes: Route[] = [
   {
     path: '',
@@ -19,7 +19,8 @@ export const featureJokeRoutes: Route[] = [
   imports: [
     CommonModule,
     RouterModule.forChild(featureJokeRoutes),
-    SharedUiNebularModule
+    SharedUiNebularModule,
+    SharedUiComponentsModule
   ],
   declarations: [
     JokeComponent,

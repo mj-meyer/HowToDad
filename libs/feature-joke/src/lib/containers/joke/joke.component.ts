@@ -1,8 +1,10 @@
+import { ModalComponent } from '@htd/shared/ui-components';
 import { Observable } from 'rxjs';
 
 import { Component, OnInit } from '@angular/core';
 import { JokeService } from '@htd/feature-joke/data-access-joke';
 import { Joke } from '@htd/interfaces';
+import { NbDialogService } from '@nebular/theme';
 
 @Component({
   selector: 'htd-joke',
@@ -33,10 +35,14 @@ import { Joke } from '@htd/interfaces';
 export class JokeComponent implements OnInit {
   joke$: Observable<Joke>;
 
-  constructor(private jokeService: JokeService) {}
+  constructor(
+    private jokeService: JokeService,
+    private dialogService: NbDialogService
+  ) {}
 
   ngOnInit() {
     this.joke$ = this.jokeService.joke$;
+    this.jokeService.loadFavourites();
     this.jokeService.getNewJoke();
   }
 
@@ -47,9 +53,18 @@ export class JokeComponent implements OnInit {
     this.jokeService.favouriteEvent();
   }
   shareJoke() {
-    this.jokeService.shareJoke();
+    // this.jokeService.shareJoke();
   }
+
   viewAllFavourites() {
-    this.jokeService.viewAllFavourites();
+    const dialog = this.dialogService.open(ModalComponent, {
+      context: { favourites$: this.jokeService.favouriteJokes$ }
+    });
+
+    const events = dialog.componentRef.instance.events.subscribe(event =>
+      this.jokeService.modalEvents(event)
+    );
+
+    dialog.onClose.subscribe(_ => events.unsubscribe());
   }
 }

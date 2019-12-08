@@ -7,7 +7,9 @@ import {
   NbIconModule,
   NbLayoutModule,
   NbSpinnerModule,
-  NbThemeModule
+  NbThemeModule,
+  NbDialogModule,
+  NbListModule
 } from '@nebular/theme';
 
 const nbModules = [
@@ -16,12 +18,14 @@ const nbModules = [
   NbIconModule,
   NbCardModule,
   NbButtonModule,
-  NbSpinnerModule
+  NbSpinnerModule,
+  NbListModule
 ];
 @NgModule({
   imports: [
     CommonModule,
     NbThemeModule.forRoot({ name: 'htd-theme' }),
+    NbDialogModule.forRoot(),
     ...nbModules
   ],
   exports: [NbThemeModule, ...nbModules]
