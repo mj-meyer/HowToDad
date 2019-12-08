@@ -2,6 +2,16 @@
 
 A web app to help you become the ULTIMATE Dad! Are you even a dad if you don't "dad joke"?
 
+🔎 **Project Design**
+
+I started off with a rough wireframe to get an idea of what I wanted to do. Below you can find a link to the Figma doc:
+- [Figma Wireframe](https://www.figma.com/file/HOAhRy7mzwuBcY5wXhuBUk/HowToDad-App)
+
+
+There's also the logo I created:
+- [Figma HTD Logo](https://www.figma.com/file/Cj2BPCL6d995AvdP76mh8p/HowToDad-Logo)
+
+
 🔎 **API's used**
 
 I chose to use 2 API's in this project.
