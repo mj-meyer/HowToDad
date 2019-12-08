@@ -65,7 +65,7 @@ export class JokeService {
 
   emptyJokeState() {
     // Todo: fix this is bad
-    this.favouriteJokes$ = [];
+    // this.favouriteJokes$ = [];
   }
 
   loadOneJoke(id) {
